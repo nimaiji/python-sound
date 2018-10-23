@@ -1,10 +1,10 @@
 # Sound Recognition with Python
 
 *First Of All
-'''python
+```python
 import Sound
-'''
+```
 * Sound simulation
-'''python
+```python
 Sound.Sound('path.wav')
-'''
+```
