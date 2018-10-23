@@ -27,7 +27,7 @@ s.draw() #Sound Digital Schematic
 s.drawFFT() #Sound FFT Schematic
 ```
 
-* Requirements
+## Requirements
 ```bash
 pip install scipy
 pip install matplotlib
