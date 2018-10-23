@@ -6,7 +6,24 @@ Clone or Download project and ...
 import Sound
 ```
 ## Sound simulation
-init a Sound module with 
+* Initialize a Sound module with 
 ```python
-Sound.Sound('path.wav')
+s = Sound.Sound(path='path.wav')
 ```
+or
+```python
+s = Sound.Sound(path='path.wav',name='mySound')
+```
+
+* Initialize FFT(Fast Fourier transform) on our Sound module
+```python
+s.initFFT()
+print(s.getFFT())
+s.drawFFT()
+```
+* Sound schematics
+```python
+s.draw() #Sound Digital Schematic
+s.drawFFT() #Sound FFT Schematic
+```
+
