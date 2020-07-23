@@ -183,11 +183,14 @@ class Noise:
         plt.phase_spectrum(self.data)
         plt.show()
 
-    def convolve(self, hn):
-        return Noise(name='{} * {}'.format(self.name, hn.name), data=np.convolve(self.data, hn.data), path='')
+    def convolve(self, other):
+        return Noise(name='{} * {}'.format(self.name, other.name), data=np.convolve(self.data, other.data), path='')
 
     def hear_noise(self):
         return Audio(data=self.data, rate=self.sample_rate)
+
+    def __mul__(self, other):
+        return self.convolve(other)
 
     def __str__(self):
         return self.data
