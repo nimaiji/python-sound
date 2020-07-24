@@ -39,13 +39,17 @@ class Hn:
     def draw(self):
         plt.title(self.name)
         plt.plot(self.points[0], self.points[1])
-        plt.xlabel('Rate')
+        plt.xlabel('Time (s)')
         plt.ylabel('Amplitude')
+        plt.savefig('{}'.format(self.name))
+        plt.grid(True)
         plt.show()
 
     def draw_phase(self):
         plt.title(self.name + 'Phase spectrum')
         plt.phase_spectrum(self.points[1])
+        plt.savefig('{} Phase spectrum'.format(self.name))
+        plt.grid(True)
         plt.show()
 
     def __str__(self):
@@ -97,7 +101,7 @@ class Noise:
         return self.fft
 
     def get_energy(self):
-        return np.sum((np.abs(self.data) ** 2) / (self.sample_rate ** -1))
+        return np.sum((np.abs(self.data) ** 2)) / len(self.data)
 
     def get_duration(self):
         return len(self.data) / float(self.sample_rate)
@@ -119,20 +123,23 @@ class Noise:
         return when
 
     def shift_right(self, slc):
+        if slc < 0:
+            return self.shift_left(abs(slc))
         amount = int(slc * self.sample_rate)
         filename = path.join(mkdtemp(), 'newfile.dat')
-        fpath = np.memmap(filename, dtype='int16', mode='w+', shape=amount + len(self.data))
-        fpath[amount::] = self.data
+        fpath = np.memmap(filename, dtype='float64', mode='w+', shape=len(self.data))
+        fpath[amount:] = self.data[:-amount]
         logging.info('{} {} shifted right'.format(self.name, amount))
         return Noise(name='{} time shifted right {}'.format(amount, self.name),
                      data=fpath, path='')
 
-    # Todo: check this function
     def shift_left(self, slc):
+        if slc < 0:
+            return self.shift_right(abs(slc))
         amount = int(slc * self.sample_rate)
         filename = path.join(mkdtemp(), 'newfile.dat')
-        fpath = np.memmap(filename, dtype='int16', mode='w+', shape=amount + len(self.data))
-        fpath[::len(self.data)] = self.data
+        fpath = np.memmap(filename, dtype='float64', mode='w+', shape=len(self.data))
+        fpath[:-amount] = self.data[amount:]
         logging.info('{} {} shifted left'.format(self.name, amount))
         return Noise(name='{} time shifted left {}'.format(amount, self.name),
                      data=fpath, path='')
