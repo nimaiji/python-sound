@@ -11,12 +11,6 @@ import sys
 logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='w',
                     format='%(levelname)s - %(name)s: %(message)s')
 
-
-def printCmd(str):
-    h = (32 * '-') + '\n'
-    print(h + str + '\n' + h)
-
-
 class Hn:
     def __init__(self, **kwargs):
         self.data = []
