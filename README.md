@@ -6,7 +6,7 @@ Clone or Download project and import "sound.py" to your code:
 import sound
 ```
 ## Create a Noise
-* import Noise class from "sound.py" and initial it with a Wav file or byte array of a sound:
+Import Noise class from "sound.py" and initial it with a Wav file or byte array of a sound:
 ```python
 Import Noise from sound
 noise1 = Noise(path='./M1.wav', name='Mic 1')
@@ -36,9 +36,9 @@ hear_noise() | returns IPython.display.audio object to hear noise in Jupyter Not
 
 
 ## Requirments
-  * matplotlib==3.3.0
-  * numpy==1.19.1
-  * scipy==1.5.1
-  * ipython==7.16.1
+  * matplotlib >3.3.0
+  * numpy >1.19.1
+  * scipy >1.5.1
+  * ipython >7.16.1
   * For better experince install "Jupyter Notebook"
   
