@@ -8,7 +8,7 @@ import sound
 ## Create a Noise
 Import Noise class from "sound.py" and initial it with a Wav file or byte array of a sound:
 ```python
-Import Noise from sound
+from sound import Noise
 noise1 = Noise(path='./M1.wav', name='Mic 1')
 
 # plot your noise
